@@ -9,8 +9,9 @@ import SwiftUI
 import Firebase
 
 struct EmailPasswordSignIn: View {
-    @State var email = ""
-    @State var password = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var errorMessage = ""
     let handleLoginSuccess: () -> Void
     
     let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
@@ -20,16 +21,26 @@ struct EmailPasswordSignIn: View {
         VStack {
             VStack {
                 TextField("Email", text: $email)
+                    .onChange(of: email, perform: { (value) in
+                        clearErrorMessage()
+                    })
                     .padding(10)
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
                     .padding(.bottom, 8)
                 SecureField("Password", text: $password)
+                    .onChange(of: password, perform: { (value) in
+                        clearErrorMessage()
+                    })
                     .padding(10)
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
                     .padding(.bottom, 8)
-            }.padding(.horizontal)
+                
+                if errorMessage != "" {
+                    Text(errorMessage).foregroundColor(Color.red)
+                }
+            }.padding(.horizontal).padding(.bottom, 8)
             
             Button(action: {login()}, label: {
                 LoginButtonContent()
@@ -37,15 +48,18 @@ struct EmailPasswordSignIn: View {
         }
     }
     
+    private func clearErrorMessage() {
+        errorMessage = ""
+    }
+    
     private func login() {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error != nil {
-                print(error?.localizedDescription ?? "")
+                errorMessage = error?.localizedDescription ?? ""
                 return
             }
             
             let user = result?.user
-            print("Login success", user?.uid)
             handleLoginSuccess()
             
         }
