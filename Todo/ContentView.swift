@@ -10,11 +10,22 @@ import Firebase
 
 
 struct ContentView: View {
+    @State var loginSuccess = false
+    
     var body: some View {
-        VStack {
-            EmailPasswordSignIn()
-            AppleSignIn(handleLoginSuccess: {})
+        NavigationView {
+            VStack {
+                EmailPasswordSignIn(handleLoginSuccess: handleLoginSuccess)
+                AppleSignIn(handleLoginSuccess: handleLoginSuccess)
+                NavigationLink(destination: Home().navigationBarBackButtonHidden(true), isActive: $loginSuccess) {
+                    EmptyView()
+                }.hidden()
+            }
         }
+    }
+    
+    private func handleLoginSuccess() {
+        loginSuccess = true
     }
 }
 

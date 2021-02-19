@@ -11,6 +11,8 @@ import Firebase
 struct EmailPasswordSignIn: View {
     @State var email = ""
     @State var password = ""
+    let handleLoginSuccess: () -> Void
+    
     let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
 
     
@@ -31,7 +33,7 @@ struct EmailPasswordSignIn: View {
             
             Button(action: {login()}, label: {
                 LoginButtonContent()
-            })
+            }).padding(.bottom, 8)
         }
     }
     
@@ -44,6 +46,8 @@ struct EmailPasswordSignIn: View {
             
             let user = result?.user
             print("Login success", user?.uid)
+            handleLoginSuccess()
+            
         }
     }
 }
@@ -62,6 +66,6 @@ struct LoginButtonContent : View {
 
 struct EmailPasswordSignIn_Previews: PreviewProvider {
     static var previews: some View {
-        EmailPasswordSignIn()
+        EmailPasswordSignIn(handleLoginSuccess: {})
     }
 }
