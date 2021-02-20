@@ -15,6 +15,7 @@
 		1B513C8C25DEC94B0062DE56 /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B513C8B25DEC94B0062DE56 /* TodoTests.swift */; };
 		1B513C9725DEC94B0062DE56 /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B513C9625DEC94B0062DE56 /* TodoUITests.swift */; };
 		1B513CA825DEC9600062DE56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B513CA725DEC9600062DE56 /* GoogleService-Info.plist */; };
+		1B901ABD25E1991B00485F5E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B901ABC25E1991B00485F5E /* CustomTextField.swift */; };
 		1BEAA11B25DED1F8001D33DA /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEAA11A25DED1F8001D33DA /* AppleSignIn.swift */; };
 		1BEAA19725DF7889001D33DA /* EmailPasswordSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEAA19625DF7889001D33DA /* EmailPasswordSignIn.swift */; };
 		1BEAA19D25DF7C6A001D33DA /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEAA19C25DF7C6A001D33DA /* Home.swift */; };
@@ -55,6 +56,7 @@
 		1B513C9825DEC94B0062DE56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B513CA725DEC9600062DE56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B513CC825DECAF40062DE56 /* Todo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Todo.entitlements; sourceTree = "<group>"; };
+		1B901ABC25E1991B00485F5E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1BEAA11A25DED1F8001D33DA /* AppleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
 		1BEAA19625DF7889001D33DA /* EmailPasswordSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordSignIn.swift; sourceTree = "<group>"; };
 		1BEAA19C25DF7C6A001D33DA /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		1B513C7825DEC9480062DE56 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				1B901ABB25E1991200485F5E /* Utils */,
 				1BFF710A25E176FC00AACD8B /* Model */,
 				1BEAA19B25DF7C5D001D33DA /* Home */,
 				1BEAA11925DED1EB001D33DA /* Auth */,
@@ -161,6 +164,14 @@
 				1B513C9825DEC94B0062DE56 /* Info.plist */,
 			);
 			path = TodoUITests;
+			sourceTree = "<group>";
+		};
+		1B901ABB25E1991200485F5E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1B901ABC25E1991B00485F5E /* CustomTextField.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		1BEAA11925DED1EB001D33DA /* Auth */ = {
@@ -449,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B901ABD25E1991B00485F5E /* CustomTextField.swift in Sources */,
 				1BEAA11B25DED1F8001D33DA /* AppleSignIn.swift in Sources */,
 				1B513C7C25DEC9480062DE56 /* ContentView.swift in Sources */,
 				1BEAA19D25DF7C6A001D33DA /* Home.swift in Sources */,

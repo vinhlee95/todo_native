@@ -10,6 +10,8 @@ import SwiftUI
 struct Home: View {
     let todos: [Todo]
     var primaryColor = Color(#colorLiteral(red: 0.06076231701, green: 0.3803908144, blue: 0.8452301824, alpha: 1))
+    @State var newTodoTitle = ""
+    @State var showNewTodoField = false
     
     var body: some View {
         VStack {
@@ -29,11 +31,19 @@ struct Home: View {
                         Spacer()
                     }
                 }
+                if showNewTodoField {
+                    HStack {
+                        Image(systemName: "circle")
+                            .font(.system(size: 24, weight: .light))
+                            .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        CustomTextField(text: $newTodoTitle, nextResponder: .constant(nil), isResponder: $showNewTodoField, isSecured: false, keyboard: .default)
+                    }.padding(.bottom, 8)
+                }
             }
             Spacer()
             HStack {
                 HStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {showNewTodoField = true}, label: {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(primaryColor)
                             .font(.system(size: 20))
