@@ -18,6 +18,7 @@
 		1BEAA11B25DED1F8001D33DA /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEAA11A25DED1F8001D33DA /* AppleSignIn.swift */; };
 		1BEAA19725DF7889001D33DA /* EmailPasswordSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEAA19625DF7889001D33DA /* EmailPasswordSignIn.swift */; };
 		1BEAA19D25DF7C6A001D33DA /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEAA19C25DF7C6A001D33DA /* Home.swift */; };
+		1BFF710C25E1770700AACD8B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFF710B25E1770700AACD8B /* Models.swift */; };
 		D29D23707BDBE0BFF2601DB3 /* Pods_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FCA945D56AB197A4914867 /* Pods_Todo.framework */; };
 		DB5F82872690D2E2E8B57660 /* Pods_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD8622E22D8BFC87AF98446 /* Pods_TodoTests.framework */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		1BEAA11A25DED1F8001D33DA /* AppleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
 		1BEAA19625DF7889001D33DA /* EmailPasswordSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordSignIn.swift; sourceTree = "<group>"; };
 		1BEAA19C25DF7C6A001D33DA /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		1BFF710B25E1770700AACD8B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		229C55A92F256F0ECFEEF962 /* Pods-Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.debug.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		4F2D8E22AD684AF836CD8249 /* Pods-TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		60FCA945D56AB197A4914867 /* Pods_Todo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,7 @@
 		1B513C7825DEC9480062DE56 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				1BFF710A25E176FC00AACD8B /* Model */,
 				1BEAA19B25DF7C5D001D33DA /* Home */,
 				1BEAA11925DED1EB001D33DA /* Auth */,
 				1B513CC825DECAF40062DE56 /* Todo.entitlements */,
@@ -175,6 +178,14 @@
 				1BEAA19C25DF7C6A001D33DA /* Home.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		1BFF710A25E176FC00AACD8B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BFF710B25E1770700AACD8B /* Models.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4AE66C514A7C6DAA76DDB029 /* Frameworks */ = {
@@ -441,6 +452,7 @@
 				1BEAA11B25DED1F8001D33DA /* AppleSignIn.swift in Sources */,
 				1B513C7C25DEC9480062DE56 /* ContentView.swift in Sources */,
 				1BEAA19D25DF7C6A001D33DA /* Home.swift in Sources */,
+				1BFF710C25E1770700AACD8B /* Models.swift in Sources */,
 				1B513C7A25DEC9480062DE56 /* TodoApp.swift in Sources */,
 				1BEAA19725DF7889001D33DA /* EmailPasswordSignIn.swift in Sources */,
 			);

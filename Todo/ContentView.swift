@@ -17,7 +17,7 @@ struct ContentView: View {
             VStack {
                 EmailPasswordSignIn(handleLoginSuccess: handleLoginSuccess)
                 AppleSignIn(handleLoginSuccess: handleLoginSuccess)
-                NavigationLink(destination: Home().navigationBarBackButtonHidden(true), isActive: $loginSuccess) {
+                NavigationLink(destination: Home(todos: []).navigationBarBackButtonHidden(true), isActive: $loginSuccess) {
                     EmptyView()
                 }.hidden()
             }

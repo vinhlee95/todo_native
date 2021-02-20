@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct Home: View {
-    private var primaryColor = Color(#colorLiteral(red: 0.06076231701, green: 0.3803908144, blue: 0.8452301824, alpha: 1))
+    let todos: [Todo]
+    var primaryColor = Color(#colorLiteral(red: 0.06076231701, green: 0.3803908144, blue: 0.8452301824, alpha: 1))
     
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(0..<5, id: \.self) {number in
+                ForEach(todos, id: \.self) {todo in
                     HStack {
                         HStack {
                             Image(systemName: "circle")
                                 .font(.system(size: 24, weight: .light))
                                 .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                             VStack(alignment: .leading) {
-                                Text("My todo")
+                                Text(todo.title)
                                     .padding(.top, 12)
                                 Divider()
                             }
@@ -32,10 +33,10 @@ struct Home: View {
             Spacer()
             HStack {
                 HStack {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(primaryColor)
-                        .font(.system(size: 20))
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(primaryColor)
+                            .font(.system(size: 20))
                         Text("New Todo")
                             .foregroundColor(primaryColor)
                             .font(.system(size: 14, weight: .semibold))
@@ -47,10 +48,19 @@ struct Home: View {
     }
 }
 
+let TODO_DATA: [Todo] = [
+    .init(title: "Go to school"),
+    .init(title: "Go to work"),
+    .init(title: "Hit to gym"),
+    .init(title: "Throw the trash"),
+    .init(title: "Learn investment"),
+    .init(title: "Buy groceries"),
+]
+
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Home().navigationBarTitle("Today")
+            Home(todos: TODO_DATA).navigationBarTitle("Today")
         }
     }
 }
