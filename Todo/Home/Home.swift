@@ -17,9 +17,9 @@ struct Home: View {
                 ForEach(todos, id: \.self) {todo in
                     HStack {
                         HStack {
-                            Image(systemName: "circle")
+                            Image(systemName: todo.done ? "largecircle.fill.circle" : "circle")
                                 .font(.system(size: 24, weight: .light))
-                                .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                                .foregroundColor(todo.done ? Color.red : Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                             VStack(alignment: .leading) {
                                 Text(todo.title)
                                     .padding(.top, 12)
@@ -49,12 +49,12 @@ struct Home: View {
 }
 
 let TODO_DATA: [Todo] = [
-    .init(title: "Go to school"),
-    .init(title: "Go to work"),
-    .init(title: "Hit to gym"),
-    .init(title: "Throw the trash"),
-    .init(title: "Learn investment"),
-    .init(title: "Buy groceries"),
+    .init(title: "Go to school", done: false),
+    .init(title: "Go to work", done: false),
+    .init(title: "Hit to gym", done: true),
+    .init(title: "Throw the trash", done: true),
+    .init(title: "Learn investment", done: false),
+    .init(title: "Buy groceries", done: true),
 ]
 
 struct Home_Previews: PreviewProvider {

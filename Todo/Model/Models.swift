@@ -9,4 +9,5 @@ import Foundation
 
 struct Todo: Hashable {
     let title: String
+    let done: Bool
 }
