@@ -39,11 +39,12 @@ struct CustomTextField: UIViewRepresentable {
         }
         
         func textFieldDidBeginEditing(_ textField: UITextField) {
+            textField.text = ""
             DispatchQueue.main.async {
                 self.isResponder = true
             }
         }
-        
+                
         func textFieldDidEndEditing(_ textField: UITextField) {
             DispatchQueue.main.async {
                 self.isResponder = false
