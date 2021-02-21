@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class TodoList: ObservableObject {
+class TodoViewModel: ObservableObject {
     @Published var todos: [Todo] = [
         .init(title: "Go to school", done: false),
         .init(title: "Go to work", done: false),
@@ -18,11 +18,11 @@ class TodoList: ObservableObject {
     ]
 }
 
-struct Home: View {
+struct TodoList: View {
     var primaryColor = Color(#colorLiteral(red: 0.06076231701, green: 0.3803908144, blue: 0.8452301824, alpha: 1))
     @State var newTodoTitle = ""
     @State var showNewTodoField = false
-    @ObservedObject var vm = TodoList()
+    @ObservedObject var vm = TodoViewModel()
     
     var body: some View {
         VStack {
@@ -76,7 +76,7 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Home().navigationBarTitle("Today")
+            TodoList().navigationBarTitle("Today")
         }
     }
 }

@@ -18,7 +18,7 @@ struct ContentView: View {
                 EmailPasswordSignIn(handleLoginSuccess: handleLoginSuccess)
                 AppleSignIn(handleLoginSuccess: handleLoginSuccess)
                 NavigationLink(
-                    destination: Home().navigationBarBackButtonHidden(true).navigationBarTitle("Today"),
+                    destination: TodoList().navigationBarBackButtonHidden(true).navigationBarTitle("Today"),
                     isActive: $loginSuccess) {
                     EmptyView()
                 }.hidden()
