@@ -40,7 +40,7 @@ struct TodoList: View {
                             }
                         }.padding(.bottom, 8)
                         Spacer()
-                    }
+                    }.padding(.leading)
                 }
                 if showNewTodoField {
                     HStack {
@@ -48,7 +48,7 @@ struct TodoList: View {
                             .font(.system(size: 24, weight: .light))
                             .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                         CustomTextField(text: $newTodoTitle, nextResponder: .constant(nil), isResponder: $showNewTodoField, onEditingEnd: onTodoSubmit, isSecured: false, keyboard: .default)
-                    }.padding(.bottom, 8)
+                    }.padding(.bottom, 8).padding(.leading)
                 }
             }
             Spacer()
@@ -64,8 +64,8 @@ struct TodoList: View {
                     })
                 }
                 Spacer()
-            }
-        }.padding(.horizontal)
+            }.padding(.leading)
+        }
     }
     
     func onTodoSubmit() {
