@@ -35,7 +35,11 @@ struct CustomTextField: UIViewRepresentable {
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            text = textField.text ?? ""
+            // Perform modification asynchronously
+            // https://stackoverflow.com/questions/58878980/textfielddidchangeselection-modifying-state-during-view-update-this-will-cause
+            DispatchQueue.main.async {
+                self.text = textField.text ?? ""
+            }
         }
         
         func textFieldDidBeginEditing(_ textField: UITextField) {
