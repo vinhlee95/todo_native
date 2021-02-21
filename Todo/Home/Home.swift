@@ -7,16 +7,27 @@
 
 import SwiftUI
 
+class TodoList: ObservableObject {
+    @Published var todos: [Todo] = [
+        .init(title: "Go to school", done: false),
+        .init(title: "Go to work", done: false),
+        .init(title: "Hit to gym", done: true),
+        .init(title: "Throw the trash", done: true),
+        .init(title: "Learn investment", done: false),
+        .init(title: "Buy groceries", done: true),
+    ]
+}
+
 struct Home: View {
-    let todos: [Todo]
     var primaryColor = Color(#colorLiteral(red: 0.06076231701, green: 0.3803908144, blue: 0.8452301824, alpha: 1))
     @State var newTodoTitle = ""
     @State var showNewTodoField = false
+    @ObservedObject var vm = TodoList()
     
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(todos, id: \.self) {todo in
+                ForEach(vm.todos, id: \.self) {todo in
                     HStack {
                         HStack {
                             Image(systemName: todo.done ? "largecircle.fill.circle" : "circle")
@@ -36,7 +47,7 @@ struct Home: View {
                         Image(systemName: "circle")
                             .font(.system(size: 24, weight: .light))
                             .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        CustomTextField(text: $newTodoTitle, nextResponder: .constant(nil), isResponder: $showNewTodoField, isSecured: false, keyboard: .default)
+                        CustomTextField(text: $newTodoTitle, nextResponder: .constant(nil), isResponder: $showNewTodoField, onEditingEnd: onTodoSubmit, isSecured: false, keyboard: .default)
                     }.padding(.bottom, 8)
                 }
             }
@@ -56,21 +67,16 @@ struct Home: View {
             }
         }.padding(.horizontal)
     }
+    
+    func onTodoSubmit() {
+        self.vm.todos.append(.init(title: newTodoTitle, done: false))
+    }
 }
-
-let TODO_DATA: [Todo] = [
-    .init(title: "Go to school", done: false),
-    .init(title: "Go to work", done: false),
-    .init(title: "Hit to gym", done: true),
-    .init(title: "Throw the trash", done: true),
-    .init(title: "Learn investment", done: false),
-    .init(title: "Buy groceries", done: true),
-]
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Home(todos: TODO_DATA).navigationBarTitle("Today")
+            Home().navigationBarTitle("Today")
         }
     }
 }

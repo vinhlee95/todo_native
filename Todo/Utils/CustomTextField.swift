@@ -12,18 +12,26 @@ import UIKit
 // when it first renders
 // https://stackoverflow.com/questions/58311022/autofocus-textfield-programmatically-in-swiftui/64546087
 struct CustomTextField: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var nextResponder : Bool?
+    @Binding var isResponder : Bool
+    var onEditingEnd: () -> Void
+    
+    var isSecured : Bool = false
+    var keyboard : UIKeyboardType
     
     class Coordinator: NSObject, UITextFieldDelegate {
         
         @Binding var text: String
         @Binding var nextResponder : Bool?
         @Binding var isResponder : Bool
+        var onEditingEnd: () -> Void
         
-        
-        init(text: Binding<String>,nextResponder : Binding<Bool?> , isResponder : Binding<Bool>) {
+        init(text: Binding<String>,nextResponder : Binding<Bool?> , isResponder : Binding<Bool>, onEditingEnd: @escaping () -> Void) {
             _text = text
             _isResponder = isResponder
             _nextResponder = nextResponder
+            self.onEditingEnd = onEditingEnd
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -44,14 +52,11 @@ struct CustomTextField: UIViewRepresentable {
                 }
             }
         }
+        
+        @objc func handleEditingEnd() {
+            onEditingEnd()
+        }
     }
-    
-    @Binding var text: String
-    @Binding var nextResponder : Bool?
-    @Binding var isResponder : Bool
-    
-    var isSecured : Bool = false
-    var keyboard : UIKeyboardType
     
     func makeUIView(context: UIViewRepresentableContext<CustomTextField>) -> UITextField {
         let textField = UITextField(frame: .zero)
@@ -60,11 +65,12 @@ struct CustomTextField: UIViewRepresentable {
         textField.autocorrectionType = .no
         textField.keyboardType = keyboard
         textField.delegate = context.coordinator
+        textField.addTarget(context.coordinator, action: #selector(context.coordinator.handleEditingEnd), for: .editingDidEndOnExit)
         return textField
     }
     
     func makeCoordinator() -> CustomTextField.Coordinator {
-        return Coordinator(text: $text, nextResponder: $nextResponder, isResponder: $isResponder)
+        return Coordinator(text: $text, nextResponder: $nextResponder, isResponder: $isResponder, onEditingEnd: onEditingEnd)
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<CustomTextField>) {
@@ -73,5 +79,4 @@ struct CustomTextField: UIViewRepresentable {
             uiView.becomeFirstResponder()
         }
     }
-    
 }

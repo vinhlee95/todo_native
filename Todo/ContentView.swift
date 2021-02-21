@@ -10,14 +10,16 @@ import Firebase
 
 
 struct ContentView: View {
-    @State var loginSuccess = false
+    @State var loginSuccess = true
     
     var body: some View {
         NavigationView {
             VStack {
                 EmailPasswordSignIn(handleLoginSuccess: handleLoginSuccess)
                 AppleSignIn(handleLoginSuccess: handleLoginSuccess)
-                NavigationLink(destination: Home(todos: []).navigationBarBackButtonHidden(true), isActive: $loginSuccess) {
+                NavigationLink(
+                    destination: Home().navigationBarBackButtonHidden(true).navigationBarTitle("Today"),
+                    isActive: $loginSuccess) {
                     EmptyView()
                 }.hidden()
             }
