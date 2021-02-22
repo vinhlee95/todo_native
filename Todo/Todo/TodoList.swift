@@ -24,10 +24,11 @@ struct TodoList: View {
     @State var showNewTodoField = false
     @ObservedObject var vm = TodoViewModel()
     
+    
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(vm.todos, id: \.self) {todo in
+                ForEach(getRenderedTodos(todos: vm.todos), id: \.self) {todo in
                     HStack {
                         TodoItem(todo: todo, toggleComplete: toggleComplete)
                         Spacer()
@@ -71,6 +72,17 @@ struct TodoList: View {
             let toggledDone = todo.id == id ? !todo.done : todo.done
             return Todo(id: todo.id, title: todo.title, done: toggledDone)
         })
+    }
+    
+    // Categorise rendering todos so that incomplete ones are displayed first
+    private func getRenderedTodos(todos: [Todo]) -> [Todo] {
+        let completedTodos = todos.filter { (todo) -> Bool in
+            return todo.done
+        }
+        let inCompleteTodos = todos.filter { (todo) -> Bool in
+            return !todo.done
+        }
+        return inCompleteTodos + completedTodos
     }
 }
 
