@@ -9,12 +9,12 @@ import SwiftUI
 
 class TodoViewModel: ObservableObject {
     @Published var todos: [Todo] = [
-        .init(title: "Go to school", done: false),
-        .init(title: "Go to work", done: false),
-        .init(title: "Hit to gym", done: true),
-        .init(title: "Throw the trash", done: true),
-        .init(title: "Learn investment", done: false),
-        .init(title: "Buy groceries", done: true),
+        .init(id: NSUUID().uuidString, title: "Go to school", done: false),
+        .init(id: NSUUID().uuidString, title: "Go to work", done: false),
+        .init(id: NSUUID().uuidString, title: "Hit to gym", done: true),
+        .init(id: NSUUID().uuidString, title: "Throw the trash", done: true),
+        .init(id: NSUUID().uuidString, title: "Learn investment", done: false),
+        .init(id: NSUUID().uuidString, title: "Buy groceries", done: true),
     ]
 }
 
@@ -29,16 +29,7 @@ struct TodoList: View {
             ScrollView {
                 ForEach(vm.todos, id: \.self) {todo in
                     HStack {
-                        HStack {
-                            Image(systemName: todo.done ? "largecircle.fill.circle" : "circle")
-                                .font(.system(size: 24, weight: .light))
-                                .foregroundColor(todo.done ? Color.red : Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                            VStack(alignment: .leading) {
-                                Text(todo.title)
-                                    .padding(.top, 12)
-                                Divider()
-                            }
-                        }.padding(.bottom, 8)
+                        TodoItem(todo: todo, toggleComplete: toggleComplete)
                         Spacer()
                     }.padding(.leading)
                 }
@@ -47,7 +38,10 @@ struct TodoList: View {
                         Image(systemName: "circle")
                             .font(.system(size: 24, weight: .light))
                             .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        CustomTextField(text: $newTodoTitle, nextResponder: .constant(nil), isResponder: $showNewTodoField, onEditingEnd: onTodoSubmit, isSecured: false, keyboard: .default)
+                        VStack(alignment: .leading) {
+                            CustomTextField(text: $newTodoTitle, nextResponder: .constant(nil), isResponder: $showNewTodoField, onEditingEnd: onTodoSubmit, isSecured: false, keyboard: .default).padding(.bottom, 2)
+                            Divider()
+                        }
                     }.padding(.bottom, 8).padding(.leading)
                 }
             }
@@ -68,8 +62,34 @@ struct TodoList: View {
         }
     }
     
-    func onTodoSubmit() {
-        self.vm.todos.append(.init(title: newTodoTitle, done: false))
+    private func onTodoSubmit() {
+        self.vm.todos.append(.init(id: NSUUID().uuidString, title: newTodoTitle, done: false))
+    }
+    
+    private func toggleComplete(id: String) {
+        self.vm.todos = self.vm.todos.map({ (todo) -> Todo in
+            let toggledDone = todo.id == id ? !todo.done : todo.done
+            return Todo(id: todo.id, title: todo.title, done: toggledDone)
+        })
+    }
+}
+
+struct TodoItem: View {
+    let todo: Todo
+    let toggleComplete: (_ id: String) -> Void
+    
+    var body: some View {
+        HStack {
+            Button(action: {toggleComplete(todo.id)}, label: {
+                Image(systemName: todo.done ? "largecircle.fill.circle" : "circle")
+                    .font(.system(size: 24, weight: .light))
+                    .foregroundColor(todo.done ? Color.red : Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+            })
+            VStack(alignment: .leading) {
+                Text(todo.title).padding(.top, 12)
+                Divider()
+            }
+        }.padding(.bottom, 8)
     }
 }
 
