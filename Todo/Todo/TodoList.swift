@@ -23,7 +23,7 @@ struct TodoList: View {
     @State var newTodoTitle = ""
     @State var showNewTodoField = false
     @ObservedObject var vm = TodoViewModel()
-    
+    @State var showCompleted = false
     
     var body: some View {
         VStack {
@@ -60,6 +60,18 @@ struct TodoList: View {
                 }
                 Spacer()
             }.padding(.leading)
+        }.toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Button(action: {showCompleted = !showCompleted}) {
+                        Label(showCompleted ? "Hide completed" : "Show completed", systemImage: showCompleted ? "eye.slash" : "eye")
+                    }
+                }
+                label: {
+                    Label("Sort", systemImage: "ellipsis.circle")
+                        .font(.system(size: 24))
+                }
+            }
         }
     }
     
@@ -82,7 +94,8 @@ struct TodoList: View {
         let inCompleteTodos = todos.filter { (todo) -> Bool in
             return !todo.done
         }
-        return inCompleteTodos + completedTodos
+        
+        return showCompleted ? inCompleteTodos + completedTodos : inCompleteTodos
     }
 }
 
