@@ -46,7 +46,7 @@ struct TodoList: View {
                         }.padding(.bottom, 8).padding(.leading)
                     } else {
                         HStack {
-                            TodoItem(todo: todo, toggleComplete: toggleComplete, handleEditTodo: handleEditTodo)
+                            TodoItem(todo: todo, toggleComplete: toggleComplete, handleEditTodo: handleEditTodo, handleDeleteTodo: handleDeleteTodo)
                             Spacer()
                         }.padding(.leading)
                     }
@@ -131,12 +131,20 @@ struct TodoList: View {
         }
         vm.editingTitle = vm.todos[index!].title
     }
+    
+    private func handleDeleteTodo(id: String) {
+        let index = vm.todos.firstIndex { (todo) -> Bool in
+            return todo.id == id
+        }!
+        vm.todos.remove(at: index)
+    }
 }
 
 struct TodoItem: View {
     let todo: Todo
     let toggleComplete: (_ id: String) -> Void
     let handleEditTodo: (_ id: String) -> Void
+    let handleDeleteTodo: (_ id: String) -> Void
     
     var body: some View {
         HStack {
@@ -147,7 +155,13 @@ struct TodoItem: View {
             })
             Button(action: {handleEditTodo(todo.id)}, label: {
                 VStack(alignment: .leading) {
-                    Text(todo.title).padding(.top, 12)
+                    HStack(alignment: .bottom) {
+                        Text(todo.title).padding(.top, 12)
+                        Spacer()
+                        Button(action: {handleDeleteTodo(todo.id)}, label: {
+                            Image(systemName: "trash").foregroundColor(.red)
+                        })
+                    }
                     Divider()
                 }.foregroundColor(.black)
             })
